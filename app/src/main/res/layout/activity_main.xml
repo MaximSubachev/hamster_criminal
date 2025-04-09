@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"> <!-- Замените на ваше фоновое изображение -->
+
+    <TextView
+        android:id="@+id/counterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Счётчик: 0"
+        android:textSize="35sp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_marginTop="50dp"/>
+
+
+    <Button
+        android:id="@+id/hamsterButton"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/round_button"
+        android:drawableTop="@drawable/hamster_image_round"
+        android:layout_below="@id/counterTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:contentDescription="Нажмите на хомяка, чтобы увеличить счётчик"/>
+
+    <Button
+        android:id="@+id/goToSecondActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Перейти ко второму экрану"
+        android:layout_below="@id/hamsterButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/doubleProfitButton"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="1dp"
+        android:text="Сбросить" />
+
+</RelativeLayout>
