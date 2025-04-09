@@ -34,6 +34,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+
+                )
         mediaPlayer = MediaPlayer.create(this, R.raw.my_music)
         mediaPlayer.isLooping = true //зацикливание
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
@@ -43,6 +53,7 @@ class MainActivity : ComponentActivity() {
 
         sharedPreferences = getSharedPreferences("HamsterCounterPrefs", MODE_PRIVATE)
         counter = sharedPreferences.getInt("counter", 0)
+        balance = sharedPreferences.getInt("balance", 0)
 
         counterTextView = findViewById(R.id.counterTextView)
         hamsterButton = findViewById(R.id.hamsterButton)
@@ -53,8 +64,10 @@ class MainActivity : ComponentActivity() {
 
         hamsterButton.setOnClickListener {
             counter++
+            balance += 1
             counterTextView.text = counter.toString()
             saveCounter()
+
 
             // Добавляем вибрацию
             val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -63,6 +76,7 @@ class MainActivity : ComponentActivity() {
 
         goToSecondActivityButton.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("balance", balance)
             startActivity(intent)
         }
 
@@ -83,17 +97,20 @@ class MainActivity : ComponentActivity() {
             val alert = builder.create()
             alert.show() // Показываем диалог
         }
-
-
-        
-
-
     }
+
 
     private fun saveCounter() {
         val editor = sharedPreferences.edit()
         editor.putInt("counter", counter)
+        editor.putInt("balance", balance)
         editor.apply()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Сохранение баланса при выходе из приложения
+        saveCounter()
     }
 
     override fun onDestroy() {

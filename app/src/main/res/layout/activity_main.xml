@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"> <!-- Замените на ваше фоновое изображение -->
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/counterTextView"
@@ -32,7 +32,7 @@
         android:id="@+id/goToSecondActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Перейти ко второму экрану"
+        android:text="Перейти на второй экран"
         android:layout_below="@id/hamsterButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"/>
